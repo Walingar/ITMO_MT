@@ -61,8 +61,8 @@
 [a..z] | *LETTER*
 *(* | *OPEN_BRACKET*
 *)* | *CLOSE_BRACKET*
-* | *STAR*
- &#124; | *OR*
+\* | *STAR*
+&#124; | *OR*
 *$* | *END*
 
 ## Синтаксический анализатор
