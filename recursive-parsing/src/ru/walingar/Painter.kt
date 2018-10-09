@@ -3,7 +3,7 @@ package ru.walingar
 import java.io.File
 
 object Painter {
-    fun draw(name: String) {
+    private fun draw(name: String) {
         ProcessBuilder("dot", "-Tpng", "$name.dot")
                 .redirectOutput(File("$name.png"))
                 .redirectError(ProcessBuilder.Redirect.INHERIT)

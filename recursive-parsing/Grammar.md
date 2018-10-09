@@ -16,7 +16,7 @@
 > RE -> RE | RE  
 > RE -> Concat  
 > Concat -> PartConcat  
-> Concat -> *\<Empty String\>*
+> Concat -> *\<Empty String\>*  
 > Part -> GroupGroup'  
 > Group' -> *\<Empty String\>*  
 > Group' -> \*  
@@ -38,7 +38,7 @@
 > RE' -> *\<Empty String\>*  
 > RE' -> |RE  
 > Concat -> PartConcat  
-> Concat -> *\<Empty String\>*
+> Concat -> *\<Empty String\>*  
 > Part -> GroupGroup'  
 > Group' -> *\<Empty String\>*  
 > Group' -> \*  
@@ -62,7 +62,7 @@
 *(* | *OPEN_BRACKET*
 *)* | *CLOSE_BRACKET*
 * | *STAR*
-&#124; | *OR*
+ &#124; | *OR*
 *$* | *END*
 
 ## Синтаксический анализатор

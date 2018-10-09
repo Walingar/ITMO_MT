@@ -14,7 +14,7 @@ class Parser {
             when (curToken) {
                 Token.LETTER, Token.OPEN_BRACKET -> {
                     Tree("RE",
-                            arrayListOf(
+                            listOf(
                                     parseConcat(),
                                     parseREPride()
                             )
@@ -22,7 +22,7 @@ class Parser {
                 }
                 Token.OR, Token.END, Token.CLOSE_BRACKET -> {
                     Tree("RE",
-                            arrayListOf(
+                            listOf(
                                     parseREPride()
                             )
                     )
@@ -35,17 +35,18 @@ class Parser {
                 Token.OR -> {
                     curToken = lexer.nextToken()
                     Tree("RE'",
-                            arrayListOf(
+                            listOf(
                                     Tree("|"),
                                     parseRE()
                             )
                     )
                 }
-                Token.END, Token.CLOSE_BRACKET -> Tree("RE'",
-                        arrayListOf(
-                                Tree("Eps")
-                        )
-                )
+                Token.END, Token.CLOSE_BRACKET ->
+                    Tree("RE'",
+                            listOf(
+                                    Tree("Eps")
+                            )
+                    )
                 else -> unexpectedLiteral("RE'")
             }
 
@@ -53,14 +54,14 @@ class Parser {
             when (curToken) {
                 Token.OPEN_BRACKET, Token.LETTER ->
                     Tree("Concat",
-                            arrayListOf(
+                            listOf(
                                     parsePart(),
                                     parseConcat()
                             )
                     )
                 Token.CLOSE_BRACKET, Token.OR, Token.END ->
                     Tree("Concat",
-                            arrayListOf(
+                            listOf(
                                     Tree("Eps")
                             )
                     )
@@ -69,12 +70,13 @@ class Parser {
 
     private fun parsePart(): Tree =
             when (curToken) {
-                Token.OPEN_BRACKET, Token.LETTER -> Tree("Part",
-                        arrayListOf(
-                                parseGroup(),
-                                parseGroupPride()
-                        )
-                )
+                Token.OPEN_BRACKET, Token.LETTER ->
+                    Tree("Part",
+                            listOf(
+                                    parseGroup(),
+                                    parseGroupPride()
+                            )
+                    )
                 else -> unexpectedLiteral("Part")
             }
 
@@ -82,7 +84,11 @@ class Parser {
             when (curToken) {
                 Token.LETTER -> {
                     curToken = lexer.nextToken()
-                    Tree("Group", arrayListOf(Tree("Letter")))
+                    Tree("Group",
+                            listOf(
+                                    Tree("Letter")
+                            )
+                    )
                 }
                 Token.OPEN_BRACKET -> {
                     curToken = lexer.nextToken()
@@ -91,7 +97,7 @@ class Parser {
                         Token.CLOSE_BRACKET -> {
                             curToken = lexer.nextToken()
                             Tree("Group",
-                                    arrayListOf(
+                                    listOf(
                                             Tree("("),
                                             treeRE,
                                             Tree(")")
@@ -108,14 +114,14 @@ class Parser {
             when (curToken) {
                 Token.STAR -> {
                     curToken = lexer.nextToken()
-                    Tree("Group''",
-                            arrayListOf(
+                    Tree("Group'",
+                            listOf(
                                     Tree("*")
                             )
                     )
                 }
                 else -> Tree("Group'",
-                        arrayListOf(
+                        listOf(
                                 Tree("Eps")
                         )
                 )
